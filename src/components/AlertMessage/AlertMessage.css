@@ -1,0 +1,34 @@
+.alert-message {
+  display: grid;
+  gap: 0.25rem;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+}
+
+.alert-message strong,
+.alert-message p {
+  margin: 0;
+}
+
+.alert-message p {
+  color: inherit;
+}
+
+.alert-message--info {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  color: #1e3a8a;
+}
+
+.alert-message--success {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.alert-message--error {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #991b1b;
+}
