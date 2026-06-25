@@ -1,6 +1,136 @@
 {
-  "clients": [],
-  "professionals": [],
-  "services": [],
-  "appointments": []
+  "clients": [
+    {
+      "id": 1,
+      "name": "Joao da Silva",
+      "phone": "55999999999",
+      "createdAt": "2026-06-15T10:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Marina Costa",
+      "phone": "5511998887777",
+      "createdAt": "2026-06-16T14:20:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Rafael Santos",
+      "phone": "5547991234567",
+      "createdAt": "2026-06-18T09:35:00.000Z"
+    }
+  ],
+  "professionals": [
+    {
+      "id": 1,
+      "name": "Carlos Oliveira",
+      "active": true,
+      "workStart": "08:00",
+      "workEnd": "18:00",
+      "createdAt": "2026-06-15T10:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Bruno Almeida",
+      "active": true,
+      "workStart": "09:00",
+      "workEnd": "19:00",
+      "createdAt": "2026-06-15T10:30:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Miguel Rocha",
+      "active": false,
+      "workStart": "10:00",
+      "workEnd": "16:00",
+      "createdAt": "2026-06-17T11:00:00.000Z"
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "name": "Corte de cabelo",
+      "price": 45,
+      "durationMinutes": 30,
+      "active": true,
+      "createdAt": "2026-06-15T10:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Barba",
+      "price": 35,
+      "durationMinutes": 30,
+      "active": true,
+      "createdAt": "2026-06-15T10:10:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Corte e barba",
+      "price": 75,
+      "durationMinutes": 60,
+      "active": true,
+      "createdAt": "2026-06-15T10:20:00.000Z"
+    },
+    {
+      "id": 4,
+      "name": "Sobrancelha",
+      "price": 20,
+      "durationMinutes": 15,
+      "active": false,
+      "createdAt": "2026-06-16T08:00:00.000Z"
+    }
+  ],
+  "appointments": [
+    {
+      "id": 1,
+      "clientId": 1,
+      "professionalId": 1,
+      "serviceId": 1,
+      "date": "2026-07-01",
+      "startTime": "14:00",
+      "endTime": "14:30",
+      "status": "scheduled",
+      "totalPrice": 45,
+      "createdAt": "2026-06-20T10:00:00.000Z",
+      "canceledAt": null
+    },
+    {
+      "id": 2,
+      "clientId": 2,
+      "professionalId": 2,
+      "serviceId": 3,
+      "date": "2026-07-01",
+      "startTime": "15:00",
+      "endTime": "16:00",
+      "status": "scheduled",
+      "totalPrice": 75,
+      "createdAt": "2026-06-21T13:10:00.000Z",
+      "canceledAt": null
+    },
+    {
+      "id": 3,
+      "clientId": 3,
+      "professionalId": 1,
+      "serviceId": 2,
+      "date": "2026-06-18",
+      "startTime": "10:00",
+      "endTime": "10:30",
+      "status": "completed",
+      "totalPrice": 35,
+      "createdAt": "2026-06-16T16:20:00.000Z",
+      "canceledAt": null
+    },
+    {
+      "id": 4,
+      "clientId": 1,
+      "professionalId": 2,
+      "serviceId": 1,
+      "date": "2026-06-28",
+      "startTime": "11:00",
+      "endTime": "11:30",
+      "status": "canceled",
+      "totalPrice": 45,
+      "createdAt": "2026-06-19T09:45:00.000Z",
+      "canceledAt": "2026-06-20T12:00:00.000Z"
+    }
+  ]
 }
