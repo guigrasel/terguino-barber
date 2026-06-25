@@ -1,0 +1,138 @@
+.client-layout,
+.admin-layout {
+  min-height: 100vh;
+}
+
+.client-layout {
+  background: #f7f2e8;
+}
+
+.client-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid #eadfcb;
+  background: rgb(247 242 232 / 94%);
+  backdrop-filter: blur(12px);
+}
+
+.brand-link,
+.admin-brand {
+  color: inherit;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.client-nav,
+.admin-nav {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.client-nav {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.client-nav a,
+.admin-nav a {
+  border-radius: 8px;
+  color: inherit;
+  font-size: 0.94rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.client-nav a {
+  padding: 0.55rem 0.75rem;
+}
+
+.client-nav a.active,
+.client-nav a:hover {
+  background: #111827;
+  color: #ffffff;
+}
+
+.client-main {
+  width: min(1080px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) 0;
+}
+
+.admin-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  background: #eef2f6;
+}
+
+.admin-sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  background: #172033;
+  color: #ffffff;
+}
+
+.admin-brand {
+  display: block;
+  padding: 0.5rem 0.25rem;
+  font-size: 1.1rem;
+}
+
+.admin-nav {
+  flex: 1;
+  flex-direction: column;
+}
+
+.admin-nav a {
+  padding: 0.75rem 0.85rem;
+  color: #dbe4f0;
+}
+
+.admin-nav a.active,
+.admin-nav a:hover {
+  background: #ffffff;
+  color: #172033;
+}
+
+.admin-main {
+  padding: clamp(1.25rem, 3vw, 3rem);
+}
+
+.layout-action {
+  white-space: nowrap;
+}
+
+@media (max-width: 820px) {
+  .client-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .client-nav {
+    justify-content: flex-start;
+  }
+
+  .admin-layout {
+    display: block;
+  }
+
+  .admin-sidebar {
+    position: static;
+    min-height: auto;
+  }
+
+  .admin-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
