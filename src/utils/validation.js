@@ -2,6 +2,10 @@ export function isBlank(value) {
   return !String(value || '').trim()
 }
 
+export function hasMinimumLength(value, minimumLength) {
+  return String(value || '').trim().length >= minimumLength
+}
+
 export function isEndTimeAfterStartTime(startTime, endTime) {
   if (!startTime || !endTime) {
     return false

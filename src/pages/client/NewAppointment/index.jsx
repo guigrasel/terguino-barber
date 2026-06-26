@@ -1,17 +1,24 @@
-import { NavLink } from 'react-router-dom'
+import { Navigate, NavLink } from 'react-router-dom'
 import Button from '../../../components/Button/index.jsx'
 import EmptyState from '../../../components/EmptyState/index.jsx'
 import { APP_ROUTES } from '../../../constants/routes.js'
+import { useClient } from '../../../hooks/useClient.js'
 
 function NewAppointment() {
+  const { client, isAuthenticated } = useClient()
+
+  if (!isAuthenticated) {
+    return <Navigate replace to={APP_ROUTES.client.home} />
+  }
+
   return (
     <section className="page-shell">
       <header className="page-header">
         <span className="page-eyebrow">Agendamento</span>
         <h1>Novo agendamento</h1>
         <p>
-          Espaço reservado para escolha de profissional, serviço, data e horário
-          disponível.
+          {client.name}, este espaço será usado para escolher profissional,
+          serviço, data e horário disponível.
         </p>
       </header>
 
