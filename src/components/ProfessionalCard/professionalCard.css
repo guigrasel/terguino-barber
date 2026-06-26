@@ -9,6 +9,11 @@
   background: #ffffff;
 }
 
+.professional-card--selected {
+  border-color: #b64b2f;
+  box-shadow: 0 0 0 3px rgb(182 75 47 / 14%);
+}
+
 .professional-card__title-row {
   display: flex;
   align-items: center;

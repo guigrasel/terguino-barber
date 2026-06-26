@@ -1,25 +1,33 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import AlertMessage from '../../../components/AlertMessage/index.jsx'
+import AppointmentSummary from '../../../components/AppointmentSummary/index.jsx'
 import Button from '../../../components/Button/index.jsx'
 import { APP_ROUTES } from '../../../constants/routes.js'
 
 function AppointmentConfirmation() {
+  const location = useLocation()
+  const appointment = location.state?.appointment
+
   return (
     <section className="page-shell">
       <header className="page-header">
         <span className="page-eyebrow">Confirmação</span>
         <h1>Agendamento confirmado</h1>
-        <p>
-          Página provisória para o retorno visual após a criação de um
-          agendamento.
-        </p>
+        <p>Seu horário foi registrado na agenda da barbearia.</p>
       </header>
 
       <div className="page-panel">
-        <AlertMessage type="success" title="Tudo certo">
-          Quando o fluxo real estiver implementado, os detalhes do compromisso
-          aparecerão aqui.
-        </AlertMessage>
+        {appointment ? (
+          <AlertMessage type="success" title="Tudo certo">
+            O agendamento foi salvo com sucesso.
+          </AlertMessage>
+        ) : (
+          <AlertMessage title="Detalhes indisponíveis">
+            Não encontramos os detalhes do agendamento nesta navegação.
+          </AlertMessage>
+        )}
+
+        {appointment && <AppointmentSummary appointment={appointment} />}
 
         <div className="page-actions">
           <Button as={NavLink} to={APP_ROUTES.client.myAppointments}>

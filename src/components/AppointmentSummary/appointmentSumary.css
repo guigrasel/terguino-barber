@@ -1,0 +1,30 @@
+.appointment-summary {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.appointment-summary div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid #eef2f6;
+  padding-bottom: 0.75rem;
+}
+
+.appointment-summary div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.appointment-summary dt {
+  color: #64748b;
+  font-weight: 800;
+}
+
+.appointment-summary dd {
+  margin: 0;
+  color: #111827;
+  font-weight: 900;
+  text-align: right;
+}

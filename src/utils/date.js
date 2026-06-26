@@ -27,9 +27,25 @@ export function addMinutesToTime(time, durationMinutes) {
   return minutesToTime(startMinutes + durationMinutes)
 }
 
-export function isDateBeforeToday(date) {
+export function getTodayDateInputValue() {
   const today = new Date()
-  const todayText = today.toISOString().slice(0, 10)
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const day = String(today.getDate()).padStart(2, '0')
 
-  return date < todayText
+  return `${year}-${month}-${day}`
+}
+
+export function isDateBeforeToday(date) {
+  return date < getTodayDateInputValue()
+}
+
+export function formatDateToDisplay(date) {
+  if (!date) {
+    return ''
+  }
+
+  const [year, month, day] = date.split('-')
+
+  return `${day}/${month}/${year}`
 }

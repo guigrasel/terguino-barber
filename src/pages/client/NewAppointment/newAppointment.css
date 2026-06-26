@@ -1,0 +1,47 @@
+.appointment-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.appointment-steps li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid #d7dee8;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #64748b;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.appointment-steps span {
+  display: grid;
+  width: 1.4rem;
+  height: 1.4rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #eef2f6;
+  color: #111827;
+  font-size: 0.78rem;
+}
+
+.appointment-steps__active {
+  border-color: #b64b2f;
+  color: #111827;
+}
+
+.appointment-steps__active span {
+  background: #b64b2f;
+  color: #ffffff;
+}
+
+.appointment-card-grid {
+  display: grid;
+  gap: 0.85rem;
+}
