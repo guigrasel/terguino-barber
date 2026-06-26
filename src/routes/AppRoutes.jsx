@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { ClientProvider } from '../contexts/ClientContext.jsx'
 import AdminLayout from '../layouts/AdminLayout.jsx'
 import ClientLayout from '../layouts/ClientLayout.jsx'
 import Dashboard from '../pages/admin/Dashboard/index.jsx'
@@ -14,26 +15,29 @@ import NotFound from '../pages/NotFound/index.jsx'
 
 function AppRoutes() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<ClientLayout />}>
-          <Route index element={<ClientLogin />} />
-          <Route path="agendamento" element={<NewAppointment />} />
-          <Route path="meus-agendamentos" element={<MyAppointments />} />
-          <Route path="confirmacao" element={<AppointmentConfirmation />} />
-        </Route>
+    <ClientProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<ClientLayout />}>
+            <Route index element={<ClientLogin />} />
+            <Route path="agendar" element={<NewAppointment />} />
+            <Route path="agendamento" element={<NewAppointment />} />
+            <Route path="meus-agendamentos" element={<MyAppointments />} />
+            <Route path="confirmacao" element={<AppointmentConfirmation />} />
+          </Route>
 
-        <Route path="admin" element={<AdminLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="profissionais" element={<Professionals />} />
-          <Route path="servicos" element={<Services />} />
-          <Route path="agenda" element={<Schedule />} />
-          <Route path="historico" element={<AppointmentHistory />} />
-        </Route>
+          <Route path="admin" element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="profissionais" element={<Professionals />} />
+            <Route path="servicos" element={<Services />} />
+            <Route path="agenda" element={<Schedule />} />
+            <Route path="historico" element={<AppointmentHistory />} />
+          </Route>
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </ClientProvider>
   )
 }
 

@@ -1,7 +1,7 @@
 export const APP_ROUTES = {
   client: {
     home: '/',
-    newAppointment: '/agendamento',
+    newAppointment: '/agendar',
     myAppointments: '/meus-agendamentos',
     confirmation: '/confirmacao',
   },

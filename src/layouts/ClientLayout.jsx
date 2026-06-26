@@ -1,6 +1,8 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { APP_ROUTES } from '../constants/routes.js'
 import Button from '../components/Button/index.jsx'
+import { useClient } from '../hooks/useClient.js'
+import { formatPhone } from '../utils/phone.js'
 import './layouts.css'
 
 const clientNavItems = [
@@ -10,6 +12,8 @@ const clientNavItems = [
 ]
 
 function ClientLayout() {
+  const { client, logout } = useClient()
+
   return (
     <div className="client-layout">
       <header className="client-header">
@@ -25,14 +29,26 @@ function ClientLayout() {
           ))}
         </nav>
 
-        <Button
-          as={NavLink}
-          className="layout-action"
-          to={APP_ROUTES.admin.dashboard}
-          variant="secondary"
-        >
-          Área do gestor
-        </Button>
+        <div className="client-header__actions">
+          {client && (
+            <div className="client-session" aria-label="Cliente identificado">
+              <span>{client.name}</span>
+              <small>{formatPhone(client.phone)}</small>
+              <Button onClick={logout} type="button" variant="secondary">
+                Sair
+              </Button>
+            </div>
+          )}
+
+          <Button
+            as={NavLink}
+            className="layout-action"
+            to={APP_ROUTES.admin.dashboard}
+            variant="secondary"
+          >
+            Área do gestor
+          </Button>
+        </div>
       </header>
 
       <main className="client-main">
