@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import { APPOINTMENT_STATUS } from '../constants/appointmentStatus.js'
 import {
+  cancelAppointment,
   createAppointment,
+  getAppointmentById,
   listAppointmentsByClient,
   listAppointmentsByProfessionalAndDate,
 } from '../services/appointmentService.js'
@@ -13,6 +15,7 @@ import { listActiveServices, listServices } from '../services/serviceService.js'
 import { getAvailableTimeSlots } from '../utils/availability.js'
 import {
   compareDateAndTime,
+  isAppointmentFuture,
   isAppointmentBeforeNow,
 } from '../utils/date.js'
 
@@ -26,6 +29,11 @@ const UNAVAILABLE_TIME_MESSAGE =
   'Esse horário não está mais disponível. Escolha outro horário para continuar.'
 const CLIENT_APPOINTMENTS_ERROR_MESSAGE =
   'Não foi possível carregar seus agendamentos. Tente novamente.'
+const CANCEL_ERROR_MESSAGE =
+  'Não foi possível cancelar o agendamento. Tente novamente.'
+const CANCEL_NOT_ALLOWED_MESSAGE =
+  'Este agendamento não pode mais ser cancelado.'
+const CANCEL_SUCCESS_MESSAGE = 'Agendamento cancelado com sucesso.'
 
 const EMPTY_APPOINTMENT_GROUPS = {
   canceled: [],
@@ -64,6 +72,13 @@ function groupClientAppointments(appointments) {
   )
 }
 
+export function canCancelAppointment(appointment) {
+  return (
+    appointment?.status === APPOINTMENT_STATUS.SCHEDULED &&
+    isAppointmentFuture(appointment)
+  )
+}
+
 export function useAppointments({ loadOptions: shouldLoadOptions = true } = {}) {
   const [activeProfessionals, setActiveProfessionals] = useState([])
   const [activeServices, setActiveServices] = useState([])
@@ -73,10 +88,12 @@ export function useAppointments({ loadOptions: shouldLoadOptions = true } = {}) 
     EMPTY_APPOINTMENT_GROUPS,
   )
   const [errorMessage, setErrorMessage] = useState('')
+  const [successMessage, setSuccessMessage] = useState('')
   const [isLoading, setIsLoading] = useState(shouldLoadOptions)
   const [isLoadingAvailability, setIsLoadingAvailability] = useState(false)
   const [isLoadingClientAppointments, setIsLoadingClientAppointments] =
     useState(false)
+  const [isCanceling, setIsCanceling] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
 
   useEffect(() => {
@@ -124,6 +141,7 @@ export function useAppointments({ loadOptions: shouldLoadOptions = true } = {}) 
 
     setIsLoadingClientAppointments(true)
     setErrorMessage('')
+    setSuccessMessage('')
 
     try {
       const [appointments, professionals, services] = await Promise.all([
@@ -155,6 +173,35 @@ export function useAppointments({ loadOptions: shouldLoadOptions = true } = {}) 
       setIsLoadingClientAppointments(false)
     }
   }, [])
+
+  async function cancelClientAppointment({ appointmentId, clientId }) {
+    setIsCanceling(true)
+    setErrorMessage('')
+    setSuccessMessage('')
+
+    try {
+      const latestAppointment = await getAppointmentById(appointmentId)
+      const belongsToClient = String(latestAppointment.clientId) === String(clientId)
+
+      if (!belongsToClient || !canCancelAppointment(latestAppointment)) {
+        setErrorMessage(CANCEL_NOT_ALLOWED_MESSAGE)
+        return null
+      }
+
+      const canceledAppointment = await cancelAppointment(appointmentId)
+
+      await loadClientAppointments(clientId)
+      setSuccessMessage(CANCEL_SUCCESS_MESSAGE)
+
+      return canceledAppointment
+    } catch {
+      setErrorMessage(CANCEL_ERROR_MESSAGE)
+
+      return null
+    } finally {
+      setIsCanceling(false)
+    }
+  }
 
   async function loadAvailableTimeSlots({ date, professional, service }) {
     setIsLoadingAvailability(true)
@@ -249,21 +296,29 @@ export function useAppointments({ loadOptions: shouldLoadOptions = true } = {}) 
     setErrorMessage('')
   }
 
+  function clearSuccessMessage() {
+    setSuccessMessage('')
+  }
+
   return {
     activeProfessionals,
     activeServices,
     availableTimeSlots,
+    cancelClientAppointment,
     clearAvailableTimeSlots,
     clearErrorMessage,
+    clearSuccessMessage,
     clientAppointmentGroups,
     clientAppointments,
     createScheduledAppointment,
     errorMessage,
+    isCanceling,
     isLoading,
     isLoadingAvailability,
     isLoadingClientAppointments,
     isSaving,
     loadAvailableTimeSlots,
     loadClientAppointments,
+    successMessage,
   }
 }

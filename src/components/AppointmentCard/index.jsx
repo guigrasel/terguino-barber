@@ -1,4 +1,5 @@
 import AppointmentStatusBadge from '../AppointmentStatusBadge/index.jsx'
+import Button from '../Button/index.jsx'
 import { formatDateToDisplay } from '../../utils/date.js'
 import './AppointmentCard.css'
 
@@ -7,7 +8,13 @@ const currencyFormatter = new Intl.NumberFormat('pt-BR', {
   style: 'currency',
 })
 
-function AppointmentCard({ appointment, variant = 'future' }) {
+function AppointmentCard({
+  appointment,
+  canCancel = false,
+  isCanceling = false,
+  onCancel,
+  variant = 'future',
+}) {
   const professionalName =
     appointment.professional?.name || 'Profissional não encontrado'
   const serviceName = appointment.service?.name || 'Serviço não encontrado'
@@ -50,6 +57,14 @@ function AppointmentCard({ appointment, variant = 'future' }) {
           <dd>{currencyFormatter.format(totalPrice)}</dd>
         </div>
       </dl>
+
+      {canCancel && (
+        <footer className="appointment-card__actions">
+          <Button disabled={isCanceling} onClick={() => onCancel(appointment)}>
+            Cancelar agendamento
+          </Button>
+        </footer>
+      )}
     </article>
   )
 }

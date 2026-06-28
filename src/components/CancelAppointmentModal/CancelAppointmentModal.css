@@ -1,0 +1,37 @@
+.cancel-appointment-modal {
+  display: grid;
+  gap: 1rem;
+}
+
+.cancel-appointment-modal p {
+  margin: 0;
+  color: #475569;
+}
+
+.cancel-appointment-modal__summary {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f8fafc;
+  padding: 0.85rem;
+}
+
+.cancel-appointment-modal__summary div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cancel-appointment-modal__summary dt {
+  color: #64748b;
+  font-weight: 800;
+}
+
+.cancel-appointment-modal__summary dd {
+  margin: 0;
+  color: #111827;
+  font-weight: 900;
+  text-align: right;
+}
