@@ -1,0 +1,39 @@
+.schedule-filters {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.5fr) minmax(220px, 1fr);
+  gap: 1rem;
+  align-items: end;
+}
+
+.schedule-filters__field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.schedule-filters__field label {
+  color: #374151;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.schedule-filters__field select {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  padding: 0.7rem 0.8rem;
+}
+
+.schedule-filters__field select:focus {
+  border-color: #b64b2f;
+  box-shadow: 0 0 0 3px rgb(182 75 47 / 16%);
+  outline: none;
+}
+
+@media (max-width: 720px) {
+  .schedule-filters {
+    grid-template-columns: 1fr;
+  }
+}
