@@ -1,6 +1,6 @@
 # Sistema de Agendamento para Barbearias
 
-Protótipo acadêmico de uma aplicação web para centralizar os agendamentos de uma barbearia. O cliente poderá escolher profissional, serviço, data e horário; o gestor poderá manter os cadastros e consultar a agenda.
+Protótipo acadêmico de uma aplicação web para centralizar os agendamentos de uma barbearia. O cliente pode se identificar, escolher profissional, serviço, data e horário, consultar seus compromissos e cancelar agendamentos futuros. O gestor pode manter profissionais e serviços, acompanhar a agenda por data/profissional e consultar histórico de atendimentos e cancelamentos.
 
 ## Requisitos
 
@@ -50,6 +50,8 @@ A aplicação será disponibilizada, por padrão, em:
 http://localhost:5173
 ```
 
+Se a porta `5173` já estiver em uso, o Vite informará a próxima porta disponível.
+
 ## Executar a API simulada
 
 Em outro terminal:
@@ -81,6 +83,13 @@ npm run build
 npm run preview
 ```
 
+Use antes da demonstração:
+
+```bash
+npm run lint
+npm run build
+```
+
 ## Persistência do protótipo
 
 O JSON Server utiliza o arquivo `db.json` com as coleções:
@@ -96,10 +105,55 @@ O JSON Server utiliza o arquivo `db.json` com as coleções:
 
 O projeto fixa o JSON Server na versão estável `0.17.4`, compatível com o modelo de IDs numéricos e com o comando `--watch` definido na documentação do projeto.
 
+## Funcionalidades entregues no MVP
+
+- identificação simples do cliente por nome e telefone;
+- cadastro, edição, ativação e inativação de profissionais;
+- cadastro, edição, ativação e inativação de serviços;
+- criação de agendamento considerando duração do serviço e agenda do profissional;
+- bloqueio de conflitos de horário;
+- consulta de agendamentos do cliente;
+- cancelamento lógico de agendamentos futuros com `status: canceled` e `canceledAt`;
+- liberação automática de horários cancelados para novos agendamentos;
+- agenda administrativa por data e profissional;
+- histórico administrativo de atendimentos passados e cancelamentos;
+- estados de loading, erro e vazio nas telas principais.
+
+## Dados de demonstração
+
+O arquivo `db.json` já possui dados para apresentar os fluxos principais:
+
+- profissionais ativos: Carlos Oliveira, Bruno Almeida e Diego Martins;
+- profissional inativo: Miguel Rocha;
+- serviços ativos: Corte de cabelo, Barba, Corte e barba e Acabamento;
+- serviço inativo: Sobrancelha;
+- clientes de exemplo, incluindo Guilherme Mattiazzi Grasel;
+- agendamentos futuros, atendimento concluído e cancelamentos preservados no histórico.
+
+Datas úteis para demonstração:
+
+- `2026-07-01`: agenda com horários agendados e cancelados;
+- `2026-07-03`: cancelamento de demonstração com horário liberado;
+- `2026-06-18`: atendimento concluído no histórico.
+
+## Roteiro de demonstração
+
+1. Inicie a API com `npm run server`.
+2. Inicie a aplicação com `npm run dev`.
+3. Acesse a área do cliente e identifique-se com nome e telefone.
+4. Crie um agendamento escolhendo profissional, serviço, data e horário disponível.
+5. Use uma data/profissional com agendamento existente e observe que horários ocupados não aparecem para seleção.
+6. Acesse "Meus horários" e cancele um agendamento futuro.
+7. Volte ao agendamento e confirme que o horário cancelado aparece disponível.
+8. Acesse `/admin/profissionais` e cadastre ou altere um profissional.
+9. Acesse `/admin/servicos` e cadastre ou altere um serviço.
+10. Acesse `/admin/agenda` para consultar agendamentos por data e profissional.
+11. Acesse `/admin/historico` para consultar atendimentos passados e cancelamentos por período, profissional e status.
+
 ## Documentação
 
-- [`PRD.md`](./PRD.md): necessidades e comportamentos do produto;
-- [`DESIGN_DOC.md`](./DESIGN_DOC.md): especificação técnica;
-- [`ADR.md`](./ADR.md): decisões arquiteturais;
-- [`agent.md`](./agent.md): instruções para agentes de IA;
-- [`Plan.md`](./Plan.md): plano de implementação;
+- [`PRD.md`](./docs/PRD.md): necessidades e comportamentos do produto;
+- [`DESIGN_DOC.md`](./docs/DESIGN_DOC.md): especificação técnica;
+- [`ADR.md`](./docs/ADR.md): decisões arquiteturais;
+- [`agent.md`](./docs/agent.md): instruções para agentes de IA;
+- [`Plan.md`](./docs/Plan.md): plano de implementação.
