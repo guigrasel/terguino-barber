@@ -119,6 +119,17 @@ O projeto fixa o JSON Server na versão estável `0.17.4`, compatível com o mod
 - histórico administrativo de atendimentos passados e cancelamentos;
 - estados de loading, erro e vazio nas telas principais.
 
+## Credenciais administrativas
+
+A área administrativa usa apenas uma identificação local para demonstração:
+
+```text
+Usuário: admin
+Senha: admin
+```
+
+Essa identificação não substitui autenticação real e não deve ser usada como segurança de produção.
+
 ## Dados de demonstração
 
 O arquivo `db.json` já possui dados para apresentar os fluxos principais:
@@ -145,10 +156,11 @@ Datas úteis para demonstração:
 5. Use uma data/profissional com agendamento existente e observe que horários ocupados não aparecem para seleção.
 6. Acesse "Meus horários" e cancele um agendamento futuro.
 7. Volte ao agendamento e confirme que o horário cancelado aparece disponível.
-8. Acesse `/admin/profissionais` e cadastre ou altere um profissional.
-9. Acesse `/admin/servicos` e cadastre ou altere um serviço.
-10. Acesse `/admin/agenda` para consultar agendamentos por data e profissional.
-11. Acesse `/admin/historico` para consultar atendimentos passados e cancelamentos por período, profissional e status.
+8. Acesse `/admin`, entre com `admin` / `admin` e abra a gestão.
+9. Acesse `/admin/profissionais` e cadastre ou altere um profissional.
+10. Acesse `/admin/servicos` e cadastre ou altere um serviço.
+11. Acesse `/admin/agenda` para consultar agendamentos por data e profissional.
+12. Acesse `/admin/historico` para consultar atendimentos passados e cancelamentos por período, profissional e status.
 
 ## Documentação
 
