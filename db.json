@@ -49,6 +49,14 @@
       "workStart": "10:00",
       "workEnd": "16:00",
       "createdAt": "2026-06-17T11:00:00.000Z"
+    },
+    {
+      "name": "Diego Martins",
+      "active": true,
+      "workStart": "08:00",
+      "workEnd": "17:00",
+      "createdAt": "2026-06-28T23:10:00.000Z",
+      "id": 4
     }
   ],
   "services": [
@@ -83,6 +91,14 @@
       "durationMinutes": 15,
       "active": false,
       "createdAt": "2026-06-16T08:00:00.000Z"
+    },
+    {
+      "name": "Acabamento",
+      "price": 25,
+      "durationMinutes": 15,
+      "active": true,
+      "createdAt": "2026-06-28T23:10:00.000Z",
+      "id": 5
     }
   ],
   "appointments": [
@@ -163,6 +179,19 @@
       "createdAt": "2026-06-28T21:53:17.578Z",
       "canceledAt": "2026-06-28T22:28:43.074Z",
       "id": 6
+    },
+    {
+      "clientId": 4,
+      "professionalId": 1,
+      "serviceId": 3,
+      "date": "2026-07-03",
+      "startTime": "10:00",
+      "endTime": "11:00",
+      "status": "canceled",
+      "totalPrice": 75,
+      "createdAt": "2026-06-28T23:00:00.000Z",
+      "canceledAt": "2026-06-28T23:05:00.000Z",
+      "id": 7
     }
   ]
 }
