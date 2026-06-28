@@ -68,6 +68,13 @@
   font-weight: 800;
 }
 
+.appointment-card__actions {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #eef2f6;
+  padding-top: 0.85rem;
+}
+
 @media (max-width: 760px) {
   .appointment-card__header {
     display: grid;
@@ -75,5 +82,13 @@
 
   .appointment-card__details {
     grid-template-columns: 1fr;
+  }
+
+  .appointment-card__actions {
+    justify-content: stretch;
+  }
+
+  .appointment-card__actions .button {
+    width: 100%;
   }
 }

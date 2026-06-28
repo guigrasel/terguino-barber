@@ -64,6 +64,10 @@ export function isAppointmentBeforeNow(appointment) {
   return timeToMinutes(appointment.startTime) < timeToMinutes(getCurrentTimeInputValue())
 }
 
+export function isAppointmentFuture(appointment) {
+  return !isAppointmentBeforeNow(appointment)
+}
+
 export function formatDateToDisplay(date) {
   if (!date) {
     return ''

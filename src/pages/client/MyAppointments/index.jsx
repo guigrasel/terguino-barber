@@ -1,12 +1,16 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import AlertMessage from '../../../components/AlertMessage/index.jsx'
 import AppointmentCard from '../../../components/AppointmentCard/index.jsx'
 import Button from '../../../components/Button/index.jsx'
+import CancelAppointmentModal from '../../../components/CancelAppointmentModal/index.jsx'
 import EmptyState from '../../../components/EmptyState/index.jsx'
 import Loading from '../../../components/Loading/index.jsx'
 import { APP_ROUTES } from '../../../constants/routes.js'
-import { useAppointments } from '../../../hooks/useAppointments.js'
+import {
+  canCancelAppointment,
+  useAppointments,
+} from '../../../hooks/useAppointments.js'
 import { useClient } from '../../../hooks/useClient.js'
 import './MyAppointments.css'
 
@@ -34,12 +38,18 @@ const appointmentSections = [
 function MyAppointments() {
   const { client } = useClient()
   const {
+    cancelClientAppointment,
     clientAppointmentGroups,
     clientAppointments,
+    clearErrorMessage,
+    clearSuccessMessage,
     errorMessage,
+    isCanceling,
     isLoadingClientAppointments,
     loadClientAppointments,
+    successMessage,
   } = useAppointments({ loadOptions: false })
+  const [appointmentToCancel, setAppointmentToCancel] = useState(null)
   const hasAppointments = clientAppointments.length > 0
 
   useEffect(() => {
@@ -47,6 +57,29 @@ function MyAppointments() {
       loadClientAppointments(client.id)
     }
   }, [client?.id, loadClientAppointments])
+
+  function openCancelModal(appointment) {
+    clearErrorMessage()
+    clearSuccessMessage()
+    setAppointmentToCancel(appointment)
+  }
+
+  function closeCancelModal() {
+    if (!isCanceling) {
+      setAppointmentToCancel(null)
+    }
+  }
+
+  async function confirmCancellation() {
+    const canceledAppointment = await cancelClientAppointment({
+      appointmentId: appointmentToCancel.id,
+      clientId: client.id,
+    })
+
+    if (canceledAppointment) {
+      setAppointmentToCancel(null)
+    }
+  }
 
   return (
     <section className="page-shell">
@@ -74,6 +107,12 @@ function MyAppointments() {
       {client && errorMessage && (
         <AlertMessage title="Atenção" type="error">
           {errorMessage}
+        </AlertMessage>
+      )}
+
+      {client && successMessage && (
+        <AlertMessage title="Tudo certo" type="success">
+          {successMessage}
         </AlertMessage>
       )}
 
@@ -120,7 +159,12 @@ function MyAppointments() {
                     {appointments.map((appointment) => (
                       <AppointmentCard
                         appointment={appointment}
+                        canCancel={canCancelAppointment(appointment)}
+                        isCanceling={
+                          isCanceling && appointmentToCancel?.id === appointment.id
+                        }
                         key={appointment.id}
+                        onCancel={openCancelModal}
                         variant={section.variant}
                       />
                     ))}
@@ -131,6 +175,14 @@ function MyAppointments() {
           })}
         </div>
       )}
+
+      <CancelAppointmentModal
+        appointment={appointmentToCancel}
+        isCanceling={isCanceling}
+        isOpen={Boolean(appointmentToCancel)}
+        onClose={closeCancelModal}
+        onConfirm={confirmCancellation}
+      />
     </section>
   )
 }
