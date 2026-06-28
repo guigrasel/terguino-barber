@@ -6,12 +6,15 @@
   place-items: center;
   padding: 1rem;
   background: rgb(15 23 42 / 58%);
+  overflow-y: auto;
 }
 
 .modal {
   width: min(520px, 100%);
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--color-surface);
   box-shadow: 0 22px 60px rgb(15 23 42 / 26%);
 }
 
@@ -25,7 +28,7 @@
 }
 
 .modal__header {
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--color-border-soft);
 }
 
 .modal__header h2 {
@@ -38,5 +41,18 @@
 }
 
 .modal__footer {
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--color-border-soft);
+}
+
+@media (max-width: 520px) {
+  .modal-backdrop {
+    align-items: end;
+    padding: 0.75rem;
+  }
+
+  .modal__header,
+  .modal__footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
 }

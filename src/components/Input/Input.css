@@ -14,19 +14,20 @@
   min-height: 2.75rem;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
-  background: #ffffff;
-  color: #111827;
+  background: var(--color-surface);
+  color: var(--color-text);
   padding: 0.7rem 0.8rem;
 }
 
-.input-field input:focus {
-  border-color: #b64b2f;
-  box-shadow: 0 0 0 3px rgb(182 75 47 / 16%);
+.input-field input:focus-visible {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgb(182 75 47 / 18%);
   outline: none;
 }
 
 .input-field input[aria-invalid='true'] {
   border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgb(220 38 38 / 12%);
 }
 
 .input-field__helper,
@@ -35,9 +36,10 @@
 }
 
 .input-field__helper {
-  color: #64748b;
+  color: var(--color-muted-soft);
 }
 
 .input-field__error {
-  color: #b91c1c;
+  color: var(--color-danger);
+  font-weight: 800;
 }

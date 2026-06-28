@@ -21,13 +21,13 @@
   min-height: 2.75rem;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
-  background: #ffffff;
-  color: #111827;
+  background: var(--color-surface);
+  color: var(--color-text);
   padding: 0.7rem 0.8rem;
 }
 
-.schedule-filters__field select:focus {
-  border-color: #b64b2f;
+.schedule-filters__field select:focus-visible {
+  border-color: var(--color-accent);
   box-shadow: 0 0 0 3px rgb(182 75 47 / 16%);
   outline: none;
 }

@@ -32,7 +32,7 @@ function HistoryTable({ appointments = [] }) {
                 className={isCanceled ? 'history-table__row--canceled' : ''}
                 key={appointment.id}
               >
-                <td>
+                <td data-label="Data">
                   <div className="history-table__main">
                     <strong>{formatDateToDisplay(appointment.date)}</strong>
                     <span>
@@ -40,7 +40,7 @@ function HistoryTable({ appointments = [] }) {
                     </span>
                   </div>
                 </td>
-                <td>
+                <td data-label="Cliente">
                   <div className="history-table__main">
                     <strong>
                       {appointment.client?.name || 'Cliente não encontrado'}
@@ -50,7 +50,7 @@ function HistoryTable({ appointments = [] }) {
                     )}
                   </div>
                 </td>
-                <td>
+                <td data-label="Profissional">
                   <div className="history-table__main">
                     <strong>
                       {appointment.professional?.name ||
@@ -61,7 +61,7 @@ function HistoryTable({ appointments = [] }) {
                     )}
                   </div>
                 </td>
-                <td>
+                <td data-label="Serviço">
                   <div className="history-table__main">
                     <strong>
                       {appointment.service?.name || 'Serviço não encontrado'}
@@ -69,10 +69,10 @@ function HistoryTable({ appointments = [] }) {
                     <span>Valor registrado no agendamento</span>
                   </div>
                 </td>
-                <td className="history-table__price">
+                <td className="history-table__price" data-label="Valor">
                   {currencyFormatter.format(totalPrice)}
                 </td>
-                <td>
+                <td data-label="Status">
                   <AppointmentStatusBadge status={appointment.status} />
                 </td>
               </tr>

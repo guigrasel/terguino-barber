@@ -19,4 +19,8 @@
   .professional-form__hours {
     grid-template-columns: 1fr;
   }
+
+  .professional-form__actions {
+    display: grid;
+  }
 }

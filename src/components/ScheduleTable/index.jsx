@@ -28,7 +28,7 @@ function ScheduleTable({ appointments = [] }) {
                 className={isCanceled ? 'schedule-table__row--canceled' : ''}
                 key={appointment.id}
               >
-                <td>
+                <td data-label="Profissional">
                   <div className="schedule-table__main">
                     <strong>
                       {appointment.professional?.name ||
@@ -39,10 +39,10 @@ function ScheduleTable({ appointments = [] }) {
                     )}
                   </div>
                 </td>
-                <td className="schedule-table__time">
+                <td className="schedule-table__time" data-label="Horário">
                   {appointment.startTime} às {appointment.endTime}
                 </td>
-                <td>
+                <td data-label="Cliente">
                   <div className="schedule-table__main">
                     <strong>
                       {appointment.client?.name || 'Cliente não encontrado'}
@@ -52,7 +52,7 @@ function ScheduleTable({ appointments = [] }) {
                     )}
                   </div>
                 </td>
-                <td>
+                <td data-label="Serviço">
                   <div className="schedule-table__main">
                     <strong>
                       {appointment.service?.name || 'Serviço não encontrado'}
@@ -62,10 +62,10 @@ function ScheduleTable({ appointments = [] }) {
                     )}
                   </div>
                 </td>
-                <td>
+                <td data-label="Status">
                   <AppointmentStatusBadge status={appointment.status} />
                 </td>
-                <td>
+                <td data-label="Agenda">
                   <span
                     className={[
                       'schedule-table__availability',

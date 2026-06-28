@@ -1,10 +1,11 @@
 .appointment-card {
   display: grid;
   gap: 1rem;
+  min-width: 0;
   border: 1px solid #e5e7eb;
   border-left: 0.35rem solid #2563eb;
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--color-surface);
   padding: 1rem;
   box-shadow: 0 12px 28px rgb(15 23 42 / 6%);
 }
@@ -29,11 +30,13 @@
 .appointment-card__title {
   display: grid;
   gap: 0.25rem;
+  min-width: 0;
 }
 
 .appointment-card__title strong {
-  color: #111827;
+  color: var(--color-text);
   font-size: 1.05rem;
+  overflow-wrap: anywhere;
 }
 
 .appointment-card__title span {
@@ -64,8 +67,9 @@
 
 .appointment-card__details dd {
   margin: 0;
-  color: #111827;
+  color: var(--color-text);
   font-weight: 800;
+  overflow-wrap: anywhere;
 }
 
 .appointment-card__actions {
