@@ -1,0 +1,50 @@
+.my-appointments {
+  display: grid;
+  gap: 1rem;
+}
+
+.my-appointments__section {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.my-appointments__section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.65rem;
+}
+
+.my-appointments__section-header h2 {
+  margin: 0;
+  color: #111827;
+  font-size: 1.12rem;
+}
+
+.my-appointments__section-header span {
+  display: grid;
+  min-width: 2rem;
+  min-height: 2rem;
+  place-items: center;
+  border-radius: 999px;
+  background: #111827;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 900;
+}
+
+.my-appointments__empty {
+  margin: 0;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #64748b;
+  padding: 1rem;
+}
+
+.my-appointments__list {
+  display: grid;
+  gap: 0.85rem;
+}

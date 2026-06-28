@@ -36,8 +36,32 @@ export function getTodayDateInputValue() {
   return `${year}-${month}-${day}`
 }
 
+export function getCurrentTimeInputValue() {
+  const now = new Date()
+
+  return minutesToTime(now.getHours() * MINUTES_PER_HOUR + now.getMinutes())
+}
+
 export function isDateBeforeToday(date) {
   return date < getTodayDateInputValue()
+}
+
+export function compareDateAndTime(first, second) {
+  if (first.date !== second.date) {
+    return first.date.localeCompare(second.date)
+  }
+
+  return timeToMinutes(first.startTime) - timeToMinutes(second.startTime)
+}
+
+export function isAppointmentBeforeNow(appointment) {
+  const today = getTodayDateInputValue()
+
+  if (appointment.date !== today) {
+    return appointment.date < today
+  }
+
+  return timeToMinutes(appointment.startTime) < timeToMinutes(getCurrentTimeInputValue())
 }
 
 export function formatDateToDisplay(date) {
