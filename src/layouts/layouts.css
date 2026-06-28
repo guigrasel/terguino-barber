@@ -38,6 +38,26 @@
   font-weight: 800;
 }
 
+.admin-session {
+  display: grid;
+  gap: 0.2rem;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 8%);
+  padding: 0.8rem;
+}
+
+.admin-session span {
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.admin-session small {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
 .client-session small {
   color: #5f6b7a;
   font-size: 0.8rem;
