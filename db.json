@@ -137,6 +137,32 @@
       "totalPrice": 45,
       "createdAt": "2026-06-19T09:45:00.000Z",
       "canceledAt": "2026-06-20T12:00:00.000Z"
+    },
+    {
+      "clientId": 4,
+      "professionalId": 1,
+      "serviceId": 1,
+      "date": "2026-06-28",
+      "startTime": "17:30",
+      "endTime": "18:00",
+      "status": "scheduled",
+      "totalPrice": 45,
+      "createdAt": "2026-06-28T21:46:45.593Z",
+      "canceledAt": null,
+      "id": 5
+    },
+    {
+      "clientId": 4,
+      "professionalId": 2,
+      "serviceId": 2,
+      "date": "2026-07-01",
+      "startTime": "09:30",
+      "endTime": "10:00",
+      "status": "scheduled",
+      "totalPrice": 35,
+      "createdAt": "2026-06-28T21:53:17.578Z",
+      "canceledAt": null,
+      "id": 6
     }
   ]
 }

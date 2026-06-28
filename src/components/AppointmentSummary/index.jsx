@@ -1,5 +1,5 @@
 import { formatDateToDisplay } from '../../utils/date.js'
-import './AppointmentSummary.css'
+import './appointmentSumary.css'
 
 const currencyFormatter = new Intl.NumberFormat('pt-BR', {
   currency: 'BRL',

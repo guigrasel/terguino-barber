@@ -1,12 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { APPOINTMENT_STATUS } from '../constants/appointmentStatus.js'
 import {
   createAppointment,
+  listAppointmentsByClient,
   listAppointmentsByProfessionalAndDate,
 } from '../services/appointmentService.js'
-import { listActiveProfessionals } from '../services/professionalService.js'
-import { listActiveServices } from '../services/serviceService.js'
+import {
+  listActiveProfessionals,
+  listProfessionals,
+} from '../services/professionalService.js'
+import { listActiveServices, listServices } from '../services/serviceService.js'
 import { getAvailableTimeSlots } from '../utils/availability.js'
+import {
+  compareDateAndTime,
+  isAppointmentBeforeNow,
+} from '../utils/date.js'
 
 const LOAD_ERROR_MESSAGE =
   'Não foi possível carregar as opções de agendamento. Tente novamente.'
@@ -16,20 +24,69 @@ const SAVE_ERROR_MESSAGE =
   'Não foi possível confirmar o agendamento. Tente novamente.'
 const UNAVAILABLE_TIME_MESSAGE =
   'Esse horário não está mais disponível. Escolha outro horário para continuar.'
+const CLIENT_APPOINTMENTS_ERROR_MESSAGE =
+  'Não foi possível carregar seus agendamentos. Tente novamente.'
 
-export function useAppointments() {
+const EMPTY_APPOINTMENT_GROUPS = {
+  canceled: [],
+  future: [],
+  past: [],
+}
+
+function mapById(records) {
+  return new Map(records.map((record) => [String(record.id), record]))
+}
+
+function groupClientAppointments(appointments) {
+  return appointments.reduce(
+    (groups, appointment) => {
+      if (appointment.status === APPOINTMENT_STATUS.CANCELED) {
+        groups.canceled.push(appointment)
+        return groups
+      }
+
+      if (
+        appointment.status === APPOINTMENT_STATUS.COMPLETED ||
+        isAppointmentBeforeNow(appointment)
+      ) {
+        groups.past.push(appointment)
+        return groups
+      }
+
+      groups.future.push(appointment)
+      return groups
+    },
+    {
+      canceled: [],
+      future: [],
+      past: [],
+    },
+  )
+}
+
+export function useAppointments({ loadOptions: shouldLoadOptions = true } = {}) {
   const [activeProfessionals, setActiveProfessionals] = useState([])
   const [activeServices, setActiveServices] = useState([])
   const [availableTimeSlots, setAvailableTimeSlots] = useState([])
+  const [clientAppointments, setClientAppointments] = useState([])
+  const [clientAppointmentGroups, setClientAppointmentGroups] = useState(
+    EMPTY_APPOINTMENT_GROUPS,
+  )
   const [errorMessage, setErrorMessage] = useState('')
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(shouldLoadOptions)
   const [isLoadingAvailability, setIsLoadingAvailability] = useState(false)
+  const [isLoadingClientAppointments, setIsLoadingClientAppointments] =
+    useState(false)
   const [isSaving, setIsSaving] = useState(false)
 
   useEffect(() => {
+    if (!shouldLoadOptions) {
+      return undefined
+    }
+
     let isMounted = true
 
-    async function loadOptions() {
+    async function loadAppointmentOptions() {
       try {
         const [professionals, services] = await Promise.all([
           listActiveProfessionals(),
@@ -51,10 +108,51 @@ export function useAppointments() {
       }
     }
 
-    loadOptions()
+    loadAppointmentOptions()
 
     return () => {
       isMounted = false
+    }
+  }, [shouldLoadOptions])
+
+  const loadClientAppointments = useCallback(async (clientId) => {
+    if (!clientId) {
+      setClientAppointments([])
+      setClientAppointmentGroups(EMPTY_APPOINTMENT_GROUPS)
+      return []
+    }
+
+    setIsLoadingClientAppointments(true)
+    setErrorMessage('')
+
+    try {
+      const [appointments, professionals, services] = await Promise.all([
+        listAppointmentsByClient(clientId),
+        listProfessionals(),
+        listServices(),
+      ])
+      const professionalsById = mapById(professionals)
+      const servicesById = mapById(services)
+      const sortedAppointments = appointments
+        .map((appointment) => ({
+          ...appointment,
+          professional: professionalsById.get(String(appointment.professionalId)),
+          service: servicesById.get(String(appointment.serviceId)),
+        }))
+        .sort(compareDateAndTime)
+
+      setClientAppointments(sortedAppointments)
+      setClientAppointmentGroups(groupClientAppointments(sortedAppointments))
+
+      return sortedAppointments
+    } catch {
+      setClientAppointments([])
+      setClientAppointmentGroups(EMPTY_APPOINTMENT_GROUPS)
+      setErrorMessage(CLIENT_APPOINTMENTS_ERROR_MESSAGE)
+
+      return []
+    } finally {
+      setIsLoadingClientAppointments(false)
     }
   }, [])
 
@@ -157,11 +255,15 @@ export function useAppointments() {
     availableTimeSlots,
     clearAvailableTimeSlots,
     clearErrorMessage,
+    clientAppointmentGroups,
+    clientAppointments,
     createScheduledAppointment,
     errorMessage,
     isLoading,
     isLoadingAvailability,
+    isLoadingClientAppointments,
     isSaving,
     loadAvailableTimeSlots,
+    loadClientAppointments,
   }
 }
