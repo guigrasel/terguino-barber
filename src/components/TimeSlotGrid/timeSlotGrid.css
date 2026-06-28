@@ -1,0 +1,32 @@
+.time-slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  gap: 0.7rem;
+}
+
+.time-slot-grid__item {
+  display: grid;
+  gap: 0.25rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  cursor: pointer;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.time-slot-grid__item:hover,
+.time-slot-grid__item--selected {
+  border-color: #b64b2f;
+  box-shadow: 0 0 0 3px rgb(182 75 47 / 14%);
+}
+
+.time-slot-grid__item span {
+  font-weight: 900;
+}
+
+.time-slot-grid__item small {
+  color: #64748b;
+  font-weight: 700;
+}
