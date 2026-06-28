@@ -19,4 +19,8 @@
   .service-form__values {
     grid-template-columns: 1fr;
   }
+
+  .service-form__actions {
+    display: grid;
+  }
 }

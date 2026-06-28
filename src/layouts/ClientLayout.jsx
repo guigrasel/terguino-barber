@@ -13,6 +13,7 @@ const clientNavItems = [
 
 function ClientLayout() {
   const { client, logout } = useClient()
+  const visibleNavItems = client ? clientNavItems : [clientNavItems[0]]
 
   return (
     <div className="client-layout">
@@ -22,7 +23,7 @@ function ClientLayout() {
         </NavLink>
 
         <nav className="client-nav" aria-label="Navegação do cliente">
-          {clientNavItems.map((item) => (
+          {visibleNavItems.map((item) => (
             <NavLink key={item.to} to={item.to}>
               {item.label}
             </NavLink>

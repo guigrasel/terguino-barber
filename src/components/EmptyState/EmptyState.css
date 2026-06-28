@@ -5,14 +5,15 @@
   padding: 1.25rem;
   border: 1px dashed #cbd5e1;
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--color-surface);
+  line-height: 1.45;
 }
 
 .empty-state__mark {
   width: 2.25rem;
   height: 0.35rem;
   border-radius: 999px;
-  background: #b64b2f;
+  background: var(--color-accent);
 }
 
 .empty-state h2,
@@ -26,7 +27,7 @@
 
 .empty-state p {
   max-width: 44rem;
-  color: #64748b;
+  color: var(--color-muted-soft);
 }
 
 .empty-state__action {

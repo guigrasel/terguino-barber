@@ -158,10 +158,10 @@
       "date": "2026-07-01",
       "startTime": "09:30",
       "endTime": "10:00",
-      "status": "scheduled",
+      "status": "canceled",
       "totalPrice": 35,
       "createdAt": "2026-06-28T21:53:17.578Z",
-      "canceledAt": null,
+      "canceledAt": "2026-06-28T22:28:43.074Z",
       "id": 6
     }
   ]

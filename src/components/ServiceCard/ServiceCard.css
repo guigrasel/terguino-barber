@@ -1,12 +1,13 @@
 .service-card {
   display: flex;
+  min-width: 0;
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   padding: 1rem;
-  background: #ffffff;
+  background: var(--color-surface);
 }
 
 .service-card--selected {
@@ -66,5 +67,12 @@
 
   .service-card__actions {
     justify-content: flex-start;
+  }
+}
+
+@media (max-width: 520px) {
+  .service-card__actions {
+    display: grid;
+    width: 100%;
   }
 }
