@@ -1,0 +1,45 @@
+.history-filters {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 1rem;
+  align-items: end;
+}
+
+.history-filters__field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.history-filters__field label {
+  color: #374151;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.history-filters__field select {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  padding: 0.7rem 0.8rem;
+}
+
+.history-filters__field select:focus {
+  border-color: #b64b2f;
+  box-shadow: 0 0 0 3px rgb(182 75 47 / 16%);
+  outline: none;
+}
+
+@media (max-width: 980px) {
+  .history-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .history-filters {
+    grid-template-columns: 1fr;
+  }
+}

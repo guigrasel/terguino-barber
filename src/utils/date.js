@@ -36,6 +36,16 @@ export function getTodayDateInputValue() {
   return `${year}-${month}-${day}`
 }
 
+export function addDaysToDateInputValue(date, amount) {
+  const nextDate = new Date(`${date}T00:00:00`)
+  nextDate.setDate(nextDate.getDate() + amount)
+  const year = nextDate.getFullYear()
+  const month = String(nextDate.getMonth() + 1).padStart(2, '0')
+  const day = String(nextDate.getDate()).padStart(2, '0')
+
+  return `${year}-${month}-${day}`
+}
+
 export function getCurrentTimeInputValue() {
   const now = new Date()
 
@@ -52,6 +62,10 @@ export function compareDateAndTime(first, second) {
   }
 
   return timeToMinutes(first.startTime) - timeToMinutes(second.startTime)
+}
+
+export function compareDateAndTimeDesc(first, second) {
+  return compareDateAndTime(second, first)
 }
 
 export function isAppointmentBeforeNow(appointment) {
